@@ -1,0 +1,13 @@
+name = "LoKIFileParser"
+uuid = "17a07e46-c2ce-42cf-8951-1bb654737edc"
+authors = ["Florens Grimm <grimm@aept.ruhr-uni-bochum.de> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
