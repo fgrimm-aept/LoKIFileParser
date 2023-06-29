@@ -100,3 +100,12 @@ function write_LoKI(filename::String, xs::LoKIFile)
         println(file, xs)
     end
 end
+
+function restore_from_backup(filename::String, xs::LoKIFile)
+    open(filename*".backup", "r") do backup
+        open(filename, "w") do file
+            data = readlines(backup)
+            [println(file, line) for line in data]
+        end
+    end
+end

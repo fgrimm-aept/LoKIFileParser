@@ -27,7 +27,7 @@ export LoKIFileB,
 # export eedfType, ionizationOperatorType, ionizationScattering,
 # growthModelType, gasTemperatureEffect, algorithm
 
-export write_LoKI, read_LoKI
+export write_LoKI, read_LoKI, restore_from_backup
 export set_gasfraction!, set_gasfraction
 export set_reducedField!, set_reducedField
 export set_enable_gui!, set_enable_gui
