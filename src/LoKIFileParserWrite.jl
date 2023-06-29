@@ -64,9 +64,9 @@ function print_structdata(io::IO, xs)
             println(io, " $data")
         elseif isstructtype(typeof(data))
             print(io, data)
-        # elseif data isa Enum
-        #     data = lowercasefirst(string(data))
-        #     println(io, " $data")
+            # elseif data isa Enum
+            #     data = lowercasefirst(string(data))
+            #     println(io, " $data")
         end
     end
 end
@@ -76,7 +76,7 @@ function print_functionality(io::IO, xs, xsname::String)
     print_structdata(io, xs)
 end
 
-Base.show(io::IO, xs::Output) =  print_functionality(io, xs, "output:")
+Base.show(io::IO, xs::Output) = print_functionality(io, xs, "output:")
 Base.show(io::IO, xs::Gui) = print_functionality(io, xs, "gui:")
 Base.show(io::IO, xs::ElectronKinectics) = print_functionality(io, xs, "electronKinetics:")
 Base.show(io::IO, xs::GasProperties) = print_functionality(io, xs, "")
@@ -95,14 +95,26 @@ function Base.show(io::IO, xs::LoKIFile)
     end
 end
 
+function create_backup(filename::String)
+    open(filename, "r") do file
+        open(filename * ".backup", "w") do backup
+            data = readlines(file)
+            for line in data
+                println(backup, line)
+            end
+        end
+    end
+end
+
 function write_LoKI(filename::String, xs::LoKIFile)
+    create_backup(filename)
     open(filename, "w") do file
         println(file, xs)
     end
 end
 
 function restore_from_backup(filename::String, xs::LoKIFile)
-    open(filename*".backup", "r") do backup
+    open(filename * ".backup", "r") do backup
         open(filename, "w") do file
             data = readlines(backup)
             [println(file, line) for line in data]

@@ -213,11 +213,6 @@ function read_LoKI(inputfilepath::String, type::Symbol)
     type_eval !== LoKIFileMC && type_eval !== LoKIFileB && throw("$type is not of type \"LoKIFileMC\" or \"LoKIFileB\".")
     open(inputfilepath, "r") do file
         data = readlines(file)
-        open(inputfilepath * ".backup", "w") do backup
-            for line in data
-                println(backup, line)
-            end
-        end
         clean_data!(data)  # removes empty line entries
         keyvals, vals, lvls = analyse_data(data)
         datablocks = prepare_datablocks(keyvals, type)
