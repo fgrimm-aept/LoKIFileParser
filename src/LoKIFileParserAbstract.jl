@@ -5,6 +5,7 @@ abstract type SmartGrid end
 abstract type EnergyGrid end
 abstract type ODESetParameters end
 abstract type NonLinearRoutines end
+abstract type Chemistry end
 abstract type Numerics end
 abstract type Gui end
 abstract type StateProperties end

@@ -5,6 +5,7 @@ STRUCT_DICT = Dict(
         :GasPropertiesMC,
         :StatePropertiesMC,
         :NumericsMC,
+        :ChemistryMC,
         :GuiMC,
         :OutputMC],
     :LoKIFileB => [
@@ -13,6 +14,7 @@ STRUCT_DICT = Dict(
         :GasPropertiesB,
         :StatePropertiesB,
         :NumericsB,
+        :ChemistryB,
         :GuiB,
         :OutputB]
 )
@@ -119,10 +121,11 @@ function find_idxs(keyvals::Vector{String})
     gasProperties_idx = findfirst(x -> occursin("gasProperties", x), keyvals)
     stateProperties_idx = findfirst(x -> occursin("stateProperties", x), keyvals)
     numerics_idx = findfirst(x -> occursin("numerics", x), keyvals)
+    chemistry_idx = findfirst(x -> occursin("chemistry", x), keyvals)
     gui_idx = findfirst(x -> occursin("gui", x), keyvals)
     output_idx = findfirst(x -> occursin("output", x), keyvals)
 
-    idxs = [workingConditions_idx, electronKinetics_idx, gasProperties_idx, stateProperties_idx, numerics_idx, gui_idx, output_idx]
+    idxs = [workingConditions_idx, electronKinetics_idx, gasProperties_idx, stateProperties_idx, numerics_idx, chemistry_idx, gui_idx, output_idx]
     return idxs
 end
 
@@ -133,13 +136,14 @@ function prepare_datablocks(keyvals::Vector{String}, type::Symbol)
     sort!(key_idxs, by=x -> x.second)
     idxs = [x.second for x in key_idxs]
     elements = [
-        key_idxs[1].first => collect(idxs[1]:idxs[2]-1),
-        key_idxs[2].first => collect(idxs[2]:idxs[3]-1),
-        key_idxs[3].first => collect(idxs[3]:idxs[4]-1),
-        key_idxs[4].first => collect(idxs[4]:idxs[5]-1),
-        key_idxs[5].first => collect(idxs[5]:idxs[6]-1),
-        key_idxs[6].first => collect(idxs[6]:idxs[7]-1),
-        key_idxs[7].first => collect(idxs[7]:length(keyvals)),
+        key_idxs[1].first => collect(idxs[1]:idxs[2]-1),            # workingConditions
+        key_idxs[2].first => collect(idxs[2]:idxs[3]-1),            # electronKinetics
+        key_idxs[3].first => collect(idxs[3]:idxs[4]-1),            # gasProperties
+        key_idxs[4].first => collect(idxs[4]:idxs[5]-1),            # stateProperties
+        key_idxs[5].first => collect(idxs[5]:idxs[6]-1),            # numerics
+        key_idxs[6].first => collect(idxs[6]:idxs[7]-1),            # chemistry
+        key_idxs[7].first => collect(idxs[7]:idxs[8]-1),            # gui
+        key_idxs[8].first => collect(idxs[8]:length(keyvals)),      # output
     ]
     return elements
 end

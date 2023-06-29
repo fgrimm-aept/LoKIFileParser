@@ -19,6 +19,10 @@ end
     refreshFrequency::Int64 = 1
 end
 
+@kwdef mutable struct ChemistryB <: Chemistry
+    isOn::Bool = false
+end
+
 @kwdef mutable struct ODESetParametersB <: ODESetParameters
     AbsTol::Float64 = 1e-300
     RelTol::Float64 = 1e-6
@@ -120,6 +124,7 @@ end
 @kwdef mutable struct LoKIFileB <: LoKIFile
     workingConditions::WorkingConditionsB = WorkingConditionsB()
     electronKinectics::ElectronKinecticsB = ElectronKinecticsB()
+    chemistry::ChemistryB = ChemistryB()
     gui::GuiB = GuiB()
     output::OutputB = OutputB()
 end

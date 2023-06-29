@@ -6,14 +6,14 @@ export LoKIFile,
     ElectronKinectics, GasProperties, StateProperties,
     Numerics, EnergyGrid,
     NonLinearRoutines, ODESetParameters, RelError, SmartGrid,
-    Gui, Output
+    Chemistry, Gui, Output
 
 # LoKI-MC structs
 export LoKIFileMC,
     WorkingConditionsMC,
     ElectronKinecticsMC, GasPropertiesMC, StatePropertiesMC,
     NumericsMC, EnergyGridMC, RelErrorMC,
-    GuiMC, OutputMC
+    ChemistryMC, GuiMC, OutputMC
 
 # LoKI-B structs
 export LoKIFileB,
@@ -21,7 +21,7 @@ export LoKIFileB,
     ElectronKinecticsB, GasPropertiesB, StatePropertiesB,
     NumericsB, EnergyGridB, SmartGridB,
     NonLinearRoutinesB, ODESetParametersB,
-    GuiB, OutputB
+    ChemistryB, GuiB, OutputB
 
 # Enums
 # export eedfType, ionizationOperatorType, ionizationScattering,

@@ -21,6 +21,10 @@ end
     terminalDisp::Vector{String} = ["setup", "MCStatus"]
 end
 
+@kwdef mutable struct ChemistryMC <: Chemistry
+    isOn::Bool = false
+end
+
 @kwdef mutable struct RelErrorMC <: RelError
     meanEnergy::Float64 = 1E-3
     fluxDriftVelocity::Float64 = 1E-2
@@ -102,6 +106,7 @@ end
 @kwdef mutable struct LoKIFileMC <: LoKIFile
     workingConditions::WorkingConditionsMC = WorkingConditionsMC()
     electronKinectics::ElectronKinecticsMC = ElectronKinecticsMC()
+    chemistry::ChemistryMC = ChemistryMC()
     gui::GuiMC = GuiMC()
     output::OutputMC = OutputMC()
 end
