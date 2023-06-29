@@ -161,6 +161,7 @@ function convert_arg!(arg, args, idx)
         vals_str = replace(arg.second, "linspace" => "", "(" => "", ")" => "")
         start, stop, len = parse.(Float64, split(vals_str, ","))
         args[idx] = arg.first => collect(range(start, stop=stop, length=Int(len)))
+    end
 end
 
 function check_arguments(args, obj)
