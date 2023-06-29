@@ -223,6 +223,4 @@ function read_LoKI(inputfilepath::String, type::Symbol)
         args = parse_datablocks(datablocks, keyvals, vals, lvls)
         return type_eval(args...)
     end
-
 end
-
