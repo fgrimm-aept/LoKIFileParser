@@ -161,6 +161,12 @@ function convert_arg!(arg, args, idx)
         vals_str = replace(arg.second, "linspace" => "", "(" => "", ")" => "")
         start, stop, len = parse.(Float64, split(vals_str, ","))
         args[idx] = arg.first => collect(range(start, stop=stop, length=Int(len)))
+end
+
+function check_arguments(args, obj)
+    fn = fieldnames(obj)
+    for arg in args
+        @assert arg in fn "$arg is not a field in $obj. Check your input file"
     end
 end
 
@@ -184,6 +190,7 @@ function parse_datablocks(elements, keyvals, vals, lvls)
                         args[idx] = arg.first => [""]
                     end
                 end
+                check_arguments(first.(args), obj)
                 push!(objs, obj(; args...))
             elseif isempty(k) && !isempty(v) && startswith(v, '-')
                 v = v[3:end]  # strip leading '- ' characters
