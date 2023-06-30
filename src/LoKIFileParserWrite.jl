@@ -19,7 +19,7 @@ function print_vector(io::IO, data::Vector{String}, structoffset::Int64)
     return nothing
 end
 
-const OFFSET_DICT = Dict(
+const OFFSET_DICT::Dict{DataType, Int64} = Dict(
     # LoKIFileMC
     WorkingConditionsMC => 0,
     ElectronKinecticsMC => 0,
@@ -27,6 +27,7 @@ const OFFSET_DICT = Dict(
     StatePropertiesMC => 2,
     NumericsMC => 2,
     RelErrorMC => 4,
+    ChemistryMC => 0,
     GuiMC => 0,
     OutputMC => 0,
 
@@ -40,6 +41,7 @@ const OFFSET_DICT = Dict(
     SmartGridB => 6,
     NonLinearRoutinesB => 4,
     ODESetParametersB => 6,
+    ChemistryB => 0,
     GuiB => 0,
     OutputB => 0,
 )
@@ -78,6 +80,7 @@ end
 
 Base.show(io::IO, xs::Output) = print_functionality(io, xs, "output:")
 Base.show(io::IO, xs::Gui) = print_functionality(io, xs, "gui:")
+Base.show(io::IO, xs::Chemistry) = print_functionality(io, xs, "chemistry:")
 Base.show(io::IO, xs::ElectronKinectics) = print_functionality(io, xs, "electronKinetics:")
 Base.show(io::IO, xs::GasProperties) = print_functionality(io, xs, "")
 Base.show(io::IO, xs::StateProperties) = print_functionality(io, xs, "")
